@@ -23,8 +23,30 @@ export const FeedbackWidget = () => {
 
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.target as unknown as {
+      name: { value: string };
+      email: { value: string };
+      feedback: { value: string };
+    };
 
-    console.log(e.target);
+    const data = {
+      rating,
+      name: form.name.value,
+      email: form.email.value,
+      message: form.feedback.value,
+    };
+    console.log(data);
+
+    const response = await fetch(import.meta.env.VITE_PUBLIC_URL, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    const content = await response.json();
+    console.log(content);
 
     setSubmitted(true);
   };
@@ -101,7 +123,7 @@ export const FeedbackWidget = () => {
             <div className="text-gray-600">
               Powered by{" "}
               <a
-                href="https://client-care-seven.vercel.app/"
+                href="https://client-care-pratform.vercel.app/"
                 target="_blank"
                 className="text-indigo-600 hover:underline"
               >
