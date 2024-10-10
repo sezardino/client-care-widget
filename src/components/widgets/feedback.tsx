@@ -13,13 +13,7 @@ import { Textarea } from "../ui/textarea";
 
 import tailwindStyles from "@/styles/index.css?inline";
 
-export type FeedbackWidgetProps = {
-  projectId: string;
-};
-
-export const FeedbackWidget = (props: FeedbackWidgetProps) => {
-  const { projectId } = props;
-
+export const FeedbackWidget = () => {
   const [rating, setRating] = useState(3);
   const [submitted, setSubmitted] = useState(false);
 
@@ -27,10 +21,10 @@ export const FeedbackWidget = (props: FeedbackWidgetProps) => {
     setRating(index + 1);
   };
 
-  const submit = async (e: FormEvent) => {
+  const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log(projectId);
+    console.log(e.target);
 
     setSubmitted(true);
   };
