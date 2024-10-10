@@ -37,14 +37,17 @@ export const FeedbackWidget = () => {
     };
     console.log(data);
 
-    const response = await fetch(import.meta.env.VITE_PUBLIC_URL, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_PUBLIC_URL}/api/feedback`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
     const content = await response.json();
     console.log(content);
 
