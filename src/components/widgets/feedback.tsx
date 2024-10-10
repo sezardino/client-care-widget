@@ -13,7 +13,12 @@ import { Textarea } from "../ui/textarea";
 
 import tailwindStyles from "@/styles/index.css?inline";
 
-export const FeedbackWidget = () => {
+export type FeedbackWidgetProps = {
+  token: string;
+};
+
+export const FeedbackWidget = (props: FeedbackWidgetProps) => {
+  const { token } = props;
   const [rating, setRating] = useState(3);
   const [submitted, setSubmitted] = useState(false);
 
@@ -42,6 +47,7 @@ export const FeedbackWidget = () => {
       {
         method: "POST",
         headers: {
+          Authorization: `Bearer ${token}`,
           Accept: "application/json",
           "Content-Type": "application/json",
         },
