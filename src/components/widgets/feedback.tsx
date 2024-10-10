@@ -29,9 +29,32 @@ export const FeedbackWidget = (props: FeedbackWidgetProps) => {
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
+    const form = e.target as unknown as {
+      name: { value: string };
+      email: { value: string };
+      feedback: { value: string };
+    };
 
-    console.log(projectId);
+    const data = {
+      projectId,
+      rating,
+      name: form.name.value,
+      email: form.email.value,
+      message: form.feedback.value,
+    };
+    console.log(data);
 
+    const response = await fetch(import.meta.env.VITE_PUBLIC_URL, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const content = await response.json();
+    console.log(content);
     setSubmitted(true);
   };
 
